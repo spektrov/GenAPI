@@ -1,20 +1,15 @@
-using GenApi.WebApi.Parsers;
-using GenApi.WebApi.Services;
+using GenApi.DomainServices;
+using GenApi.Templates.Parser;
+using GenApi.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddScoped<ITemplateParser, TemplateParser>();
-builder.Services.AddScoped<ISolutionGenService, SolutionGenService>();
+builder.Services.AddWebApi();
+builder.Services.AddTemplateParser();
+builder.Services.AddDomainServices();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

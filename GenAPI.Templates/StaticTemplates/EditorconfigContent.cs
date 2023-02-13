@@ -1,53 +1,7 @@
-﻿namespace GenApi.WebApi.Helpers;
-
-public class SolutionGenHelper
+﻿namespace GenApi.Templates.StaticTemplates;
+public static class EditorconfigContent
 {
-    public static string GenerateSolutionFileContent(string appNamespace)
-    {
-        string slnContent = @"
-Microsoft Visual Studio Solution File, Format Version 12.00
-Project(""{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"") = ""{APP-NAMESPACE}"", ""{APP-NAMESPACE}\{APP-NAMESPACE}.csproj"", ""{YOUR-PROJECT-GUID}""
-EndProject
-Global
-    GlobalSection(SolutionConfigurationPlatforms) = preSolution
-        Debug|Any CPU = Debug|Any CPU
-        Release|Any CPU = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {YOUR-PROJECT-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {YOUR-PROJECT-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {YOUR-PROJECT-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {YOUR-PROJECT-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(SolutionProperties) = preSolution
-        HideSolutionNode = FALSE
-    EndGlobalSection
-EndGlobal
-";
-        slnContent = slnContent.Replace("{YOUR-PROJECT-GUID}", Guid.NewGuid().ToString().ToUpper());
-        slnContent = slnContent.Replace("{APP-NAMESPACE}", appNamespace);
-        
-        return slnContent;
-    }
-    
-    public static string GenerateProjectFileContent(int sdkVersion)
-    {
-        string projectContent = @"
-<Project Sdk=""Microsoft.NET.Sdk"">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-";
-        return projectContent;
-    }
-    
-    public static string GenerateEditorconfigContent()
-    {
-        string content = @"
-# NOTE: Requires **VS2019 16.3** or later
-
+    public static string Value => @"
 # New Rule Set
 # Description:  
 
@@ -267,6 +221,4 @@ dotnet_diagnostic.CA1707.severity = none
 [*/Migrations/*]
 generated_code = true
 ";
-        return content;
-    }
 }

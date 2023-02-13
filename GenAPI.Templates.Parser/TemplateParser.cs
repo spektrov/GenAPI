@@ -1,6 +1,6 @@
 ﻿using RazorEngineCore;
 
-namespace GenApi.WebApi.Parsers;
+namespace GenAPI.Templates.Parser;
 
 public class TemplateParser : ITemplateParser
 {

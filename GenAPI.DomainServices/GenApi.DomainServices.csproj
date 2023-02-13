@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Build.Locator" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GenAPI.Domain\GenApi.Domain.csproj" />
+    <ProjectReference Include="..\GenAPI.Templates\GenApi.Templates.csproj" />
+  </ItemGroup>
+</Project>

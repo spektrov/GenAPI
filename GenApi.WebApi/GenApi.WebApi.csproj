@@ -1,17 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <InvariantGlobalization>true</InvariantGlobalization>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
-        <PackageReference Include="Microsoft.Build.Locator" Version="1.6.10" />
-        <PackageReference Include="RazorEngineCore" Version="2023.11.2" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
-    </ItemGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+	<PackageReference Include="Swashbuckle.AspNetCore" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GenAPI.DomainServices\GenApi.DomainServices.csproj" />
+    <ProjectReference Include="..\GenAPI.Templates.Abstractions\GenApi.Templates.Parser.csproj" />
+    <ProjectReference Include="..\GenAPI.Templates\GenApi.Templates.csproj" />
+  </ItemGroup>
 </Project>
