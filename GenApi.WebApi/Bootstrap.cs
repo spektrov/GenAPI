@@ -1,6 +1,4 @@
-﻿using GenApi.WebApi.Filters;
-
-namespace GenApi.WebApi;
+﻿namespace GenApi.WebApi;
 
 public static class Bootstrap
 {
@@ -10,11 +8,6 @@ public static class Bootstrap
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-
-        services.AddMvc(options =>
-        {
-            options.Filters.Add<AddFileHeaderFilter>();
-        });
 
         return services;
     }
