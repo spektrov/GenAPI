@@ -4,3 +4,6 @@ GET {{GenApi.WebApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{GenApi.WebApi_HostAddress}}/api/AppGenerator/
+Accept: application/json
