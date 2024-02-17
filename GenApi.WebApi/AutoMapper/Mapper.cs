@@ -8,6 +8,7 @@ public class Mapper : Profile
 {
     public Mapper()
     {
-        CreateMap<GenSettingsDto, GenSettingsModel>();
+        CreateMap<GenSettingsDto, GenSettingsModel>()
+            .ForMember(dest => dest.DotnetSdkVersion, src => src.MapFrom<DotnetSdkVersionResolver>());
     }
 }

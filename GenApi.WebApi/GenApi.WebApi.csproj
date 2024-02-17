@@ -7,6 +7,5 @@
   <ItemGroup>
     <ProjectReference Include="..\GenAPI.DomainServices\GenApi.DomainServices.csproj" />
     <ProjectReference Include="..\GenAPI.Templates.Abstractions\GenApi.Templates.Parser.csproj" />
-    <ProjectReference Include="..\GenAPI.Templates\GenApi.Templates.csproj" />
   </ItemGroup>
 </Project>

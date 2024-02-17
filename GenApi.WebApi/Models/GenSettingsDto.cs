@@ -8,4 +8,6 @@ public class GenSettingsDto
 
     [MinLength(2)]
     required public string AppName { get; set; }
+
+    public int DotnetSdkVersion { get; set; }
 }
