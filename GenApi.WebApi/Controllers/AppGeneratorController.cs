@@ -21,7 +21,7 @@ public class AppGeneratorController(IMapper mapper, ISolutionGenService solution
             var settingsModel = mapper.Map<GenSettingsModel>(genSettingsDto);
             var zipStream = await solutionGenService.GenerateApplicationAsync(settingsModel, token);
             AddResponseHeaders(genSettingsDto.AppName);
-
+            
             return new FileStreamResult(zipStream, MediaTypeNames.Application.Zip);
         }
         catch (Exception ex)

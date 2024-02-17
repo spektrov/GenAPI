@@ -23,7 +23,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenApi.Templates.Common", "GenApi.Templates.Common\GenApi.Templates.Common.csproj", "{63012E42-C8EC-44F2-9203-1E42ECB54E6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{033AA5FE-06A4-47D2-8030-9E15B94E71D7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
