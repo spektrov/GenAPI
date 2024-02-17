@@ -1,13 +1,15 @@
 ﻿using System.Net.Mime;
+using AutoMapper;
+using GenApi.Domain.Interfaces;
+using GenApi.Domain.Models;
 using GenApi.WebApi.Models;
-using GenApi.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GenApi.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AppGeneratorController(ISolutionGenService solutionGenService) : ControllerBase
+public class AppGeneratorController(IMapper mapper, ISolutionGenService solutionGenService) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> GenerateConsoleApp(
@@ -16,9 +18,9 @@ public class AppGeneratorController(ISolutionGenService solutionGenService) : Co
     {
         try
         {
-            var zipStream = await solutionGenService.GenerateApplicationAsync(genSettingsDto, token);
-            
-            AddHeaders(genSettingsDto.AppName);
+            var settingsModel = mapper.Map<GenSettingsModel>(genSettingsDto);
+            var zipStream = await solutionGenService.GenerateApplicationAsync(settingsModel, token);
+            AddResponseHeaders(genSettingsDto.AppName);
             
             return new FileStreamResult(zipStream, MediaTypeNames.Application.Zip);
         }
@@ -28,9 +30,9 @@ public class AppGeneratorController(ISolutionGenService solutionGenService) : Co
         }
     }
 
-    private void AddHeaders(string appName)
+    private void AddResponseHeaders(string appName)
     {
-        Response.Headers.Append("Content-Disposition", $"attachment; filename={appName}.zip");
-        Response.Headers.Append("Content-Type", MediaTypeNames.Application.Zip);
+        HttpContext.Response.Headers.Append("Content-Disposition", $"attachment; filename={appName}.zip");
+        HttpContext.Response.Headers.Append("Content-Type", MediaTypeNames.Application.Zip);
     }
 }

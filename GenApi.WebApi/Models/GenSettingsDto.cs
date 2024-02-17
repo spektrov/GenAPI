@@ -4,8 +4,10 @@ namespace GenApi.WebApi.Models;
 
 public class GenSettingsDto
 {
-    public required string Message { get; set; }
-    
+    required public string Message { get; set; }
+
     [MinLength(2)]
-    public required string AppName { get; set; }
+    required public string AppName { get; set; }
+
+    public int DotnetSdkVersion { get; set; }
 }
