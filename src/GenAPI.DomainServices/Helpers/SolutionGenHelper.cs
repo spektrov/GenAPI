@@ -6,7 +6,7 @@ public class SolutionGenHelper
     {
         string slnContent = @"
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project(""{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"") = ""{APP-NAMESPACE}"", ""{APP-NAMESPACE}\{APP-NAMESPACE}.csproj"", ""{YOUR-PROJECT-GUID}""
+Project(""{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"") = ""{APP-NAMESPACE}"", ""src\{APP-NAMESPACE}\Domain.csproj"", ""{YOUR-PROJECT-GUID}""
 EndProject
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution

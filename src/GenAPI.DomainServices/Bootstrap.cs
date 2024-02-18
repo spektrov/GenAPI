@@ -11,9 +11,22 @@ public static class Bootstrap
         // Initialize MSBuild for in-memory project creation.
         MSBuildLocator.RegisterDefaults();
 
+        AddCommands(services);
+
         services.AddScoped<ISolutionGenService, SolutionGenService>();
         services.AddScoped<IFileGenService, FileGenService>();
 
         return services;
+    }
+
+    private static void AddCommands(IServiceCollection services)
+    {
+        var commandImplementationTypes = typeof(Bootstrap).Assembly.GetTypes()
+            .Where(type => typeof(IGenCommand).IsAssignableFrom(type) && !type.IsInterface);
+
+        foreach (var commandImplementationType in commandImplementationTypes)
+        {
+            services.AddScoped(typeof(IGenCommand), commandImplementationType);
+        }
     }
 }
