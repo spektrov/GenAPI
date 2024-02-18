@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.WebApi", "GenApi.WebApi\GenApi.WebApi.csproj", "{406EA106-B50C-4E36-92B5-51F2650032DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.WebApi", "src\GenApi.WebApi\GenApi.WebApi.csproj", "{406EA106-B50C-4E36-92B5-51F2650032DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.Domain", "GenAPI.Domain\GenApi.Domain.csproj", "{80EDC8E2-06A8-47BA-80DD-15404D3D0A56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.Domain", "src\GenAPI.Domain\GenApi.Domain.csproj", "{80EDC8E2-06A8-47BA-80DD-15404D3D0A56}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.DomainServices", "GenAPI.DomainServices\GenApi.DomainServices.csproj", "{0FB8CC9B-2447-4564-BB87-1FDBF9592DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.DomainServices", "src\GenAPI.DomainServices\GenApi.DomainServices.csproj", "{0FB8CC9B-2447-4564-BB87-1FDBF9592DC2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{A9BB38AD-B0A7-4547-87E7-3745DFD4433C}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.Templates", "GenAPI.Templates\GenApi.Templates.csproj", "{32D0BF23-63F8-4CC9-AAEC-4B89CEDA1190}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.Templates", "src\GenAPI.Templates\GenApi.Templates.csproj", "{32D0BF23-63F8-4CC9-AAEC-4B89CEDA1190}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.Templates.Parser", "GenAPI.Templates.Abstractions\GenApi.Templates.Parser.csproj", "{18FB159A-9692-4715-93CB-1FABFEB89033}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenApi.Templates.Parser", "src\GenAPI.Templates.Abstractions\GenApi.Templates.Parser.csproj", "{18FB159A-9692-4715-93CB-1FABFEB89033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenApi.Templates.Common", "GenApi.Templates.Common\GenApi.Templates.Common.csproj", "{63012E42-C8EC-44F2-9203-1E42ECB54E6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenApi.Templates.Common", "src\GenApi.Templates.Common\GenApi.Templates.Common.csproj", "{63012E42-C8EC-44F2-9203-1E42ECB54E6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{033AA5FE-06A4-47D2-8030-9E15B94E71D7}"
 Global
