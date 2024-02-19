@@ -1,8 +1,16 @@
-﻿namespace GenApi.Domain.Models;
+﻿using GenApi.Domain.Enums;
+
+namespace GenApi.Domain.Models;
 
 public class GenSettingsModel
 {
-    public string SqlScript { get; set; }
+    public DbmsType DbmsType { get; set; }
+
+    public SqlTableConfigurationModel TableConfiguration { get; set; }
+
+    public string SqlTableScript { get; set; }
+
+    public DotnetEntityConfigurationModel EntityConfiguration { get; set; }
 
     public string Message { get; set; }
 

@@ -1,0 +1,9 @@
+﻿namespace GenApi.Domain.Models;
+public class DotnetPropertyConfigurationModel
+{
+    public string Name { get; set; }
+
+    public string Type { get; set; }
+
+    public bool NotNull { get; set; }
+}

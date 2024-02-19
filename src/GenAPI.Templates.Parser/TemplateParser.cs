@@ -1,19 +1,21 @@
-﻿using RazorEngineCore;
+﻿using GenApi.Templates.Common;
+using RazorEngineCore;
 
-namespace GenAPI.Templates.Parser;
+namespace GenApi.Templates.Parser;
 
 public class TemplateParser : ITemplateParser
 {
-    public async Task<string> ParseAsync<T>(string templateName, T model)
+    public async Task<string> ParseAsync<T>(T model, CancellationToken token)
+        where T : BaseTemplateModel
     {
-        var templatePath = GetTemplatePath(templateName);
+        var templatePath = GetTemplatePath(model.TemplateName);
 
         if (!File.Exists(templatePath))
         {
             throw new FileNotFoundException($"Template not found at '{templatePath}'.");
         }
 
-        var templateContent = await File.ReadAllTextAsync(templatePath);
+        var templateContent = await File.ReadAllTextAsync(templatePath, token);
 
         var razorEngine = new RazorEngine();
         var template = await razorEngine.CompileAsync(templateContent);
@@ -24,7 +26,7 @@ public class TemplateParser : ITemplateParser
 
     private static string GetTemplatePath(string templateName)
     {
-        var templatesDirectory = @"Models\Templates";
+        var templatesDirectory = @"..\GenApi.Templates\Templates";
         var templateFile = $"{templateName}.cshtml";
 
         return Path.Combine(templatesDirectory, templateFile);

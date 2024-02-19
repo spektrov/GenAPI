@@ -2,6 +2,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="RazorEngineCore" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GenApi.Templates.Common\GenApi.Templates.Common.csproj" />
 	</ItemGroup>
 
 </Project>
