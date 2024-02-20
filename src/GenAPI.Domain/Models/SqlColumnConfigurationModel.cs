@@ -6,4 +6,6 @@ public class SqlColumnConfigurationModel
     public string ColumnType { get; set; }
 
     public bool NotNull { get; set; }
+
+    public bool IsPrimaryKey { get; set; }
 }

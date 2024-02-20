@@ -6,11 +6,7 @@ public class GenSettingsModel
 {
     public DbmsType DbmsType { get; set; }
 
-    public SqlTableConfigurationModel TableConfiguration { get; set; }
-
     public string SqlTableScript { get; set; }
-
-    public DotnetEntityConfigurationModel EntityConfiguration { get; set; }
 
     public string Message { get; set; }
 

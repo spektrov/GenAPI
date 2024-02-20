@@ -26,7 +26,7 @@ public class AppGeneratorController(IMapper mapper, ISolutionGenService solution
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Error: {ex.Message}");
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
         }
     }
 

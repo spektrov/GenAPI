@@ -1,7 +1,7 @@
 ﻿using GenApi.Domain.Constants;
 
 namespace GenApi.DomainServices.Mappers;
-public static class DotnetMsSqlServerType
+public static class DotnetMsSqlServerTypes
 {
     public static Dictionary<string, IEnumerable<string>> Value => new()
     {

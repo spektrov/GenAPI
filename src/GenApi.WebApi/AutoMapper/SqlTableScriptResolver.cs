@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Text.RegularExpressions;
+using AutoMapper;
+using GenApi.Domain.Enums;
 using GenApi.Domain.Models;
 using GenApi.WebApi.Models;
 
@@ -7,11 +9,11 @@ namespace GenApi.WebApi.AutoMapper;
 public class SqlTableScriptResolver : IValueResolver<GenSettingsDto, GenSettingsModel, SqlTableConfigurationModel>
 {
     private static readonly string[] createTableSeparator = new[] { "CREATE TABLE" };
-    private static readonly char[] braceSeparator = new[] { '(', ')' };
     private static readonly char[] propertySeparator = new[] { ',' };
     private static readonly char itemSeparator = ' ';
-    private static readonly string Not = "not";
-    private static readonly string Null = "null";
+    private static readonly string NotNull = "not null";
+    private static readonly string Unique = "unique";
+    private static readonly string PrimaryKey = "primary key";
 
     public SqlTableConfigurationModel Resolve(
         GenSettingsDto source, GenSettingsModel destination, SqlTableConfigurationModel destMember, ResolutionContext context)
@@ -24,10 +26,17 @@ public class SqlTableScriptResolver : IValueResolver<GenSettingsDto, GenSettings
         foreach (var statement in statements)
         {
             // Split statement into components
-            var components = statement.Split(braceSeparator, StringSplitOptions.RemoveEmptyEntries);
+            var components = statement.Split(itemSeparator, StringSplitOptions.RemoveEmptyEntries);
 
             result.TableName = components[0].Trim();
-            var columnLines = components[1].Split(propertySeparator, StringSplitOptions.RemoveEmptyEntries);
+
+            var pattern = @"\,\d+|[\)\(;]|\b\d+\b";
+            string clearedStatement = Regex.Replace(statement, pattern, string.Empty);
+            clearedStatement = Regex.Replace(clearedStatement, result.TableName, string.Empty, RegexOptions.IgnoreCase);
+
+            var columnLines = clearedStatement
+                .Split(propertySeparator, StringSplitOptions.TrimEntries)
+                .Where(x => !string.IsNullOrEmpty(x));
 
             var columns = new List<SqlColumnConfigurationModel>();
 
@@ -48,11 +57,15 @@ public class SqlTableScriptResolver : IValueResolver<GenSettingsDto, GenSettings
                 {
                     column.ColumnType = columnComponents[1];
                 }
+                else
+                {
+                    // TODO: Add error of parsing model.
+                    continue;
+                }
 
-                // Check for not null constraint if it exists
-                column.NotNull = columnComponents.Count > 3
-                    && columnComponents[2].Equals(Not, StringComparison.OrdinalIgnoreCase)
-                    && columnComponents[3].Equals(Null, StringComparison.OrdinalIgnoreCase);
+                column.NotNull = DefineIfNotNull(source.DbmsType, columnLine);
+
+                column.IsPrimaryKey = DefineIfPrimaryKey(source.DbmsType, columnLine);
 
                 columns.Add(column);
             }
@@ -61,5 +74,19 @@ public class SqlTableScriptResolver : IValueResolver<GenSettingsDto, GenSettings
         }
 
         return result;
+    }
+
+    private bool DefineIfPrimaryKey(DbmsType dbms, string columnDefinition)
+    {
+        return columnDefinition.Contains(PrimaryKey, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool DefineIfNotNull(DbmsType dbms, string columnDefinition)
+    {
+        var isNotNull = columnDefinition.Contains(NotNull, StringComparison.OrdinalIgnoreCase)
+            || columnDefinition.Contains(Unique, StringComparison.OrdinalIgnoreCase)
+            || DefineIfPrimaryKey(dbms, columnDefinition);
+
+        return isNotNull;
     }
 }

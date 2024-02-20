@@ -1,4 +1,5 @@
 ﻿using System.IO.Compression;
+using GenApi.Domain.Constants;
 using GenApi.Domain.Extensions;
 using GenApi.Domain.Interfaces;
 using GenApi.Domain.Models;
@@ -10,7 +11,18 @@ public class SolutionGenService(IEnumerable<IGenCommand> commands) : ISolutionGe
 {
     public async Task<Stream> GenerateApplicationAsync(GenSettingsModel settings, CancellationToken token)
     {
-        settings.EntityConfiguration = ParseEntityConfiguration(settings);
+        settings.EntityConfiguration = new DotnetEntityConfigurationModel
+        {
+            EntityName = settings.TableConfiguration.TableName.ToPascalCase(),
+            Properties = settings.TableConfiguration.Columns
+            .Select(column => new DotnetPropertyConfigurationModel
+            {
+                Name = !column.IsPrimaryKey ? column.ColumnName.ToPascalCase() : NameConstants.Id,
+                Type = PropertyTypeMapper.Map(settings.DbmsType, column.ColumnType),
+                NotNull = column.NotNull,
+                IsId = column.IsPrimaryKey,
+            }),
+        };
 
         var zipMemoryStream = new MemoryStream();
 
@@ -24,28 +36,5 @@ public class SolutionGenService(IEnumerable<IGenCommand> commands) : ISolutionGe
         zipMemoryStream.Seek(0, SeekOrigin.Begin);
 
         return zipMemoryStream;
-    }
-
-    private DotnetEntityConfigurationModel ParseEntityConfiguration(GenSettingsModel settings)
-    {
-        var response = new DotnetEntityConfigurationModel
-        {
-            EntityName = settings.TableConfiguration.TableName.ToPascalCase()
-        };
-
-        var properties = new List<DotnetPropertyConfigurationModel>();
-        foreach (var column in settings.TableConfiguration.Columns)
-        {
-            properties.Add(new DotnetPropertyConfigurationModel()
-            {
-                Name = column.ColumnName.ToPascalCase(),
-                Type = PropertyTypeMapper.Map(settings.DbmsType, column.ColumnType),
-                NotNull = column.NotNull,
-            });
-        }
-
-        response.Properties = properties;
-
-        return response;
     }
 }

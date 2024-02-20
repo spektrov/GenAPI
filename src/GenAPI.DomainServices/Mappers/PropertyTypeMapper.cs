@@ -16,7 +16,7 @@ public static class PropertyTypeMapper
 
         return dbmsType switch
         {
-            DbmsType.MSSQLSERVER => MapForDbms(sqlType, DotnetMsSqlServerType.Value),
+            DbmsType.MSSQLSERVER => MapForDbms(sqlType, DotnetMsSqlServerTypes.Value),
             _ => throw new ArgumentException("Not supported DBMS type"),
         };
     }

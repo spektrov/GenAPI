@@ -6,4 +6,6 @@ public class DotnetPropertyConfigurationModel
     public string Type { get; set; }
 
     public bool NotNull { get; set; }
+
+    public bool IsId { get; set; }
 }
