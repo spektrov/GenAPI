@@ -8,7 +8,7 @@ namespace GenApi.DomainServices.CommandHandlers;
 
 internal class SolutionGenCommand(IFileGenService fileGenService) : IGenCommand
 {
-    public Task ExecuteAsync(ZipArchive archive, GenSettingsModel model, CancellationToken token)
+    public Task ExecuteAsync(ZipArchive archive, ExtendedGenSettingsModel model, CancellationToken token)
     {
         var fileName = $"{model.AppName}Solution.sln";
 

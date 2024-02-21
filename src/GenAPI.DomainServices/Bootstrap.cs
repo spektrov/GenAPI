@@ -10,9 +10,8 @@ public static class Bootstrap
     {
         // Initialize MSBuild for in-memory project creation.
         MSBuildLocator.RegisterDefaults();
-
         AddCommands(services);
-
+        services.AddAutoMapper(typeof(Bootstrap).Assembly);
         services.AddScoped<ISolutionGenService, SolutionGenService>();
         services.AddScoped<IFileGenService, FileGenService>();
 

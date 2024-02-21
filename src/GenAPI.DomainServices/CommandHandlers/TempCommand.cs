@@ -7,7 +7,7 @@ using GenApi.Templates.TemplateModels;
 namespace GenApi.DomainServices.CommandHandlers;
 internal class TempCommand(IFileGenService fileGenService) : IGenCommand
 {
-    public Task ExecuteAsync(ZipArchive archive, GenSettingsModel model, CancellationToken token)
+    public Task ExecuteAsync(ZipArchive archive, ExtendedGenSettingsModel model, CancellationToken token)
     {
         var fileName = "Program.cs";
 

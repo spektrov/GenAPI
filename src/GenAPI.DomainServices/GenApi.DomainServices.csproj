@@ -2,6 +2,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
 	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenAPI.Domain\GenApi.Domain.csproj" />
