@@ -1,4 +1,4 @@
-﻿namespace GenApi.WebApi;
+﻿namespace GenApi.WebApi.Extensions;
 
 public static class Bootstrap
 {

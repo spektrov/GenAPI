@@ -1,6 +1,6 @@
 ﻿namespace GenApi.DomainServices.Helpers;
 
-public class SolutionGenHelper
+public static class SolutionGenHelper
 {
     public static string GenerateSolutionFileContent(string appNamespace)
     {

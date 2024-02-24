@@ -8,7 +8,6 @@ public class SqlTableScriptResolver : IValueResolver<GenSettingsModel, ExtendedG
 {
     private static readonly string TablePropertyPattern = @"\,\d+|[\)\(;]|\b\d+\b|[\n]";
     private static readonly string createTableSeparator = "create table";
-    private static readonly char SemiColonSeparator = ';';
     private static readonly char ComaSeparator = ',';
     private static readonly char SpaceSeparator = ' ';
     private static readonly string NotNull = "not null";

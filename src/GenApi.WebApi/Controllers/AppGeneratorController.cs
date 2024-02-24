@@ -16,18 +16,11 @@ public class AppGeneratorController(IMapper mapper, ISolutionGenService solution
         [FromBody] GenSettingsDto genSettingsDto,
         CancellationToken token)
     {
-        try
-        {
-            var settingsModel = mapper.Map<GenSettingsModel>(genSettingsDto);
-            var zipStream = await solutionGenService.GenerateApplicationAsync(settingsModel, token);
-            AddResponseHeaders(genSettingsDto.AppName);
+        var settingsModel = mapper.Map<GenSettingsModel>(genSettingsDto);
+        var zipStream = await solutionGenService.GenerateApplicationAsync(settingsModel, token);
+        AddResponseHeaders(genSettingsDto.AppName);
 
-            return new FileStreamResult(zipStream, MediaTypeNames.Application.Zip);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
-        }
+        return new FileStreamResult(zipStream, MediaTypeNames.Application.Zip);
     }
 
     private void AddResponseHeaders(string appName)

@@ -1,4 +1,4 @@
-﻿namespace GenApi.WebApi;
+﻿namespace GenApi.WebApi.Models;
 
 public static class Constants
 {
