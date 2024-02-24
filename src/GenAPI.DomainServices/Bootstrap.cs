@@ -14,6 +14,7 @@ public static class Bootstrap
         AddCommands(services);
         services.AddScoped<ISolutionGenService, SolutionGenService>();
         services.AddScoped<IFileGenService, FileGenService>();
+        services.AddScoped<IArchiveGenService, ArchiveGenService>();
 
         return services;
     }
