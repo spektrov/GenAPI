@@ -2,20 +2,19 @@
 using GenApi.Domain.Interfaces;
 using GenApi.Domain.Models;
 using GenApi.DomainServices.Extensions;
-using GenApi.Templates.StaticTemplates;
+using GenApi.Templates.TemplateModels;
 
 namespace GenApi.DomainServices.CommandHandlers;
-
-internal class DomainProjectGenCommand(IFileGenService fileGenService) : IGenCommand
+internal class DirectoryBuildGenCommand(IFileGenService fileGenService) : IGenCommand
 {
     public Task ExecuteAsync(ZipArchive archive, ExtendedGenSettingsModel model, CancellationToken token)
     {
-        var fileName = $"{model.AppName}.Domain.csproj";
+        var fileName = "Directory.Build.props";
 
         return fileGenService.CreateEntryAsync(
             archive,
-            fileName.ToDomainProjectFile(model.AppName),
-            DomainProjectFileContent.Value,
+            fileName.ToCoreSolutionFile(),
+            new DirectoryBuildModel { SdkVersion = model.DotnetSdkVersion },
             token);
     }
 }

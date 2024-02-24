@@ -14,11 +14,12 @@ public class SolutionGenService(IMapper mapper, IEnumerable<IGenCommand> command
 
         var zipMemoryStream = new MemoryStream();
 
-        using var archive = new ZipArchive(zipMemoryStream, ZipArchiveMode.Create, true);
-
-        foreach (var command in commands)
+        using (var archive = new ZipArchive(zipMemoryStream, ZipArchiveMode.Create, true))
         {
-            await command.ExecuteAsync(archive, model, token);
+            foreach (var command in commands)
+            {
+                await command.ExecuteAsync(archive, model, token);
+            }
         }
 
         zipMemoryStream.Seek(0, SeekOrigin.Begin);

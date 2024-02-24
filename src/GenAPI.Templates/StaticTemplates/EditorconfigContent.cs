@@ -1,8 +1,8 @@
 ﻿namespace GenApi.Templates.StaticTemplates;
 public static class EditorconfigContent
 {
-    public static string Value => @"
-# New Rule Set
+    public static string Value =>
+        @"# New Rule Set
 # Description:  
 
 # Code files

@@ -2,9 +2,9 @@
 
 public static class FileNameExtensions
 {
-    public static string ToSourceProjectFile(this string filename, string appName)
+    public static string ToCoreSolutionFile(this string filename)
     {
-        return $"src/{appName}/{filename}";
+        return $"{filename}";
     }
 
     public static string ToDomainProjectFile(this string filename, string appName)
@@ -25,10 +25,5 @@ public static class FileNameExtensions
     public static string ToDALProjectFile(this string filename, string appName)
     {
         return $"src/{appName}.DataAccess/{filename}";
-    }
-
-    public static string ToCoreSolutionFile(this string filename, string appName)
-    {
-        return $"{appName}/{filename}";
     }
 }

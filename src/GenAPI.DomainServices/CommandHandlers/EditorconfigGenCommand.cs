@@ -14,7 +14,7 @@ public class EditorconfigGenCommand(IFileGenService fileGenService) : IGenComman
 
         return fileGenService.CreateEntryAsync(
             archive,
-            fileName.ToCoreSolutionFile(model.AppName),
+            fileName.ToCoreSolutionFile(),
             EditorconfigContent.Value,
             token);
     }

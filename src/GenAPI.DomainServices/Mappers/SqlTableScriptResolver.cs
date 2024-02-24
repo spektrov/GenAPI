@@ -9,6 +9,7 @@ public class SqlTableScriptResolver : IValueResolver<GenSettingsModel, ExtendedG
     private static readonly string TablePropertyPattern = @"\,\d+|[\)\(;]|\b\d+\b|[\n]";
     private static readonly string createTableSeparator = "create table";
     private static readonly char SemiColonSeparator = ';';
+    private static readonly char ComaSeparator = ',';
     private static readonly char SpaceSeparator = ' ';
     private static readonly string NotNull = "not null";
     private static readonly string Unique = "unique";
@@ -18,7 +19,10 @@ public class SqlTableScriptResolver : IValueResolver<GenSettingsModel, ExtendedG
         GenSettingsModel source, ExtendedGenSettingsModel destination, SqlTableConfigurationModel destMember, ResolutionContext context)
     {
         // Split script into individual statements
-        var statements = Regex.Split(source.SqlTableScript, createTableSeparator, RegexOptions.IgnoreCase);
+        source.SqlTableScript = source.SqlTableScript.Replace("\n", string.Empty);
+
+        var statements = Regex.Split(source.SqlTableScript, createTableSeparator, RegexOptions.IgnoreCase)
+            .Where(s => !string.IsNullOrWhiteSpace(s)).Select(s => s.Trim());
 
         // TODO: build multiple sql tables.
         var result = BuildTableConfiguration(statements.FirstOrDefault());
@@ -29,15 +33,17 @@ public class SqlTableScriptResolver : IValueResolver<GenSettingsModel, ExtendedG
 
     private SqlTableConfigurationModel BuildTableConfiguration(string tableLine)
     {
-        string GetTableName() => tableLine.Split(SpaceSeparator, StringSplitOptions.RemoveEmptyEntries).First().Trim();
+        var tableName = tableLine.Split(SpaceSeparator, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim();
+        var allItems = Regex.Replace(tableLine, TablePropertyPattern, string.Empty)[tableName.Length..];
+
+        var items = allItems.Split(ComaSeparator, StringSplitOptions.TrimEntries);
+        var aItems = items.Where(x => !string.IsNullOrWhiteSpace(x));
+        var columns = aItems.Select(BuildColumnConfiguration);
 
         return new SqlTableConfigurationModel
         {
-            TableName = GetTableName(),
-            Columns = Regex.Replace(tableLine, TablePropertyPattern, string.Empty)[(GetTableName().Length + 2)..]
-            .Split(SemiColonSeparator, StringSplitOptions.TrimEntries)
-            .Where(x => !string.IsNullOrEmpty(x))
-            .Select(BuildColumnConfiguration),
+            TableName = tableName,
+            Columns = columns,
         };
     }
 

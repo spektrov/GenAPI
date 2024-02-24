@@ -5,7 +5,7 @@ using GenApi.DomainServices.Extensions;
 using GenApi.Templates.TemplateModels;
 
 namespace GenApi.DomainServices.CommandHandlers;
-internal class TempCommand(IFileGenService fileGenService) : IGenCommand
+internal class TempCommand(IFileGenService fileGenService)
 {
     public Task ExecuteAsync(ZipArchive archive, ExtendedGenSettingsModel model, CancellationToken token)
     {

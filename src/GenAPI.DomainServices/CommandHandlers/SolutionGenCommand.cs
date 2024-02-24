@@ -14,7 +14,7 @@ internal class SolutionGenCommand(IFileGenService fileGenService) : IGenCommand
 
         return fileGenService.CreateEntryAsync(
            archive,
-           fileName.ToCoreSolutionFile(model.AppName),
+           fileName.ToCoreSolutionFile(),
            SolutionGenHelper.GenerateSolutionFileContent(model.AppName),
            token);
     }
