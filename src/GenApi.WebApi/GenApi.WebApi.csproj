@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+	<PackageReference Include="Swashbuckle.AspNetCore" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GenAPI.DomainServices\GenApi.DomainServices.csproj" />
+    <ProjectReference Include="..\GenAPI.Templates.Parser\GenApi.Templates.Parser.csproj" />
+  </ItemGroup>
+</Project>

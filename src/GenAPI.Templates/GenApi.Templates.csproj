@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\GenAPI.Domain\GenApi.Domain.csproj" />
+    <ProjectReference Include="..\GenApi.Templates.Common\GenApi.Templates.Common.csproj" />
+  </ItemGroup>
+</Project>
