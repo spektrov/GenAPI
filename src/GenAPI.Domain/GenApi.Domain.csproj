@@ -1,4 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="FluentResults" />
+	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenApi.Templates.Common\GenApi.Templates.Common.csproj" />
   </ItemGroup>

@@ -15,24 +15,16 @@ public class RequestLoggerMiddlewareExtension
 
     public async Task Invoke(HttpContext context)
     {
-        Stopwatch stopwatch = new();
+        var stopwatch = new Stopwatch();
         stopwatch.Start();
-
-        var method = context.Request.Method;
-        var path = context.Request.Path;
-        var queryParameters = context.Request.Query.Count > 0
-            ? context.Request.QueryString.ToString()
-            : "none";
-        var statusCode = context.Response.StatusCode.ToString();
 
         await _next(context);
 
         _logger.LogInformation(
-            "Requested endpoint: {Method} {Endpoint}\nWith parameters {Parameters}\nStatus code: {StatusCode}\nExecution time: {Time}",
-            method,
-            path,
-            queryParameters,
-            statusCode,
+            "Requested endpoint: {Method} {Endpoint}\nStatus code: {StatusCode}\nExecution time: {Time}",
+            context.Request.Method,
+            context.Request.Path,
+            context.Response.StatusCode.ToString(),
             stopwatch.Elapsed.ToString());
     }
 }

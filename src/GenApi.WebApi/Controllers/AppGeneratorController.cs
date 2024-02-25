@@ -1,5 +1,5 @@
-﻿using System.Net.Mime;
-using AutoMapper;
+﻿using AutoMapper;
+using FluentResults;
 using GenApi.Domain.Interfaces;
 using GenApi.Domain.Models;
 using GenApi.WebApi.Models;
@@ -12,20 +12,12 @@ namespace GenApi.WebApi.Controllers;
 public class AppGeneratorController(IMapper mapper, ISolutionGenService solutionGenService) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> GenerateConsoleApp(
+    public async Task<Result<Stream>> GenerateConsoleApp(
         [FromBody] GenSettingsDto genSettingsDto,
         CancellationToken token)
     {
         var settingsModel = mapper.Map<GenSettingsModel>(genSettingsDto);
-        var zipStream = await solutionGenService.GenerateApplicationAsync(settingsModel, token);
-        AddResponseHeaders(genSettingsDto.AppName);
-
-        return new FileStreamResult(zipStream, MediaTypeNames.Application.Zip);
-    }
-
-    private void AddResponseHeaders(string appName)
-    {
-        HttpContext.Response.Headers.Append("Content-Disposition", $"attachment; filename={appName}.zip");
-        HttpContext.Response.Headers.Append("Content-Type", MediaTypeNames.Application.Zip);
+        Response.Headers.Append("Content-Disposition", $"attachment; filename={settingsModel.AppName}.zip");
+        return await solutionGenService.GenerateApplicationAsync(settingsModel, token);
     }
 }

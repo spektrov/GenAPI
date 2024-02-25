@@ -1,8 +1,7 @@
-﻿namespace GenApi.DomainServices.Helpers;
-
-public static class SolutionGenHelper
+﻿namespace GenApi.Templates.StaticTemplates;
+public static class SolutionFileContent
 {
-    public static string GenerateSolutionFileContent(string appNamespace)
+    public static string Value(string appNamespace)
     {
         string slnContent =
             @"Microsoft Visual Studio Solution File, Format Version 12.00
