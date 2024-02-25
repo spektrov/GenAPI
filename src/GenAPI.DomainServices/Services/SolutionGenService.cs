@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentResults;
 using GenApi.Domain.Interfaces;
 using GenApi.Domain.Models;
 
@@ -10,7 +11,7 @@ public class SolutionGenService(
     IEnumerable<IGenCommand> commands)
     : ISolutionGenService
 {
-    public async Task<Stream> GenerateApplicationAsync(GenSettingsModel settings, CancellationToken token)
+    public async Task<Result<Stream>> GenerateApplicationAsync(GenSettingsModel settings, CancellationToken token)
     {
         var model = mapper.Map<ExtendedGenSettingsModel>(settings);
         model.EntityConfiguration = mapper.Map<DotnetEntityConfigurationModel>(model.TableConfiguration);

@@ -3,6 +3,7 @@
 		<PackageReference Include="Microsoft.Build.Locator" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+		<PackageReference Include="FluentResults" />
 	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenAPI.Domain\GenApi.Domain.csproj" />

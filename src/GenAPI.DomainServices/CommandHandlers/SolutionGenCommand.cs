@@ -2,7 +2,7 @@
 using GenApi.Domain.Interfaces;
 using GenApi.Domain.Models;
 using GenApi.DomainServices.Extensions;
-using GenApi.DomainServices.Helpers;
+using GenApi.Templates.StaticTemplates;
 
 namespace GenApi.DomainServices.CommandHandlers;
 
@@ -15,7 +15,7 @@ internal class SolutionGenCommand(IFileGenService fileGenService) : IGenCommand
         return fileGenService.CreateEntryAsync(
            archive,
            fileName.ToCoreSolutionFile(),
-           SolutionGenHelper.GenerateSolutionFileContent(model.AppName),
+           SolutionFileContent.Value(model.AppName),
            token);
     }
 }

@@ -15,6 +15,7 @@ public static class Bootstrap
         services.AddScoped<ISolutionGenService, SolutionGenService>();
         services.AddScoped<IFileGenService, FileGenService>();
         services.AddScoped<IArchiveGenService, ArchiveGenService>();
+        services.AddScoped<ISqlTableParser, SqlTableParser>();
 
         return services;
     }

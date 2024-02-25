@@ -1,14 +1,20 @@
 using GenApi.DomainServices;
 using GenApi.Templates.Parser;
-using GenApi.WebApi;
+using GenApi.WebApi.Extensions;
+using GenApi.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddSerilogLogging(builder.Configuration);
 builder.Services.AddWebApi();
 builder.Services.AddTemplateParser();
 builder.Services.AddDomainServices();
 
 var app = builder.Build();
+
+app.UseErrorHandling();
+
+app.UseRequestLogger();
 
 if (app.Environment.IsDevelopment())
 {
